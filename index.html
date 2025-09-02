@@ -1,214 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relative Intensity Calculator</title>
-    <style>
-        /* General Body & Font Styles */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #333;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Relative Intensity Calculator</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-        /* Main Container */
-        .container {
-            width: 100%;
-            max-width: 1000px; /* Reduced width slightly */
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
+    .container {
+      width: 100%;
+      max-width: 100%;
+      background-color: #ffffff;
+      border-radius: 0;
+      box-shadow: none;
+      overflow-x: auto; /* horizontal scroll for small screens */
+    }
 
-        h1 {
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-            background-color: #4a5568;
-            color: white;
-            font-size: 1.5em;
-        }
+    h1 {
+      text-align: center;
+      padding: 12px;
+      margin: 0;
+      background-color: #4a5568;
+      color: white;
+      font-size: 1.2em;
+    }
 
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      table-layout: fixed; /* forces equal column widths */
+    }
 
-        th, td {
-            padding: 12px 8px;
-            border: 1px solid #ddd;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
+    th, td {
+      padding: 6px 4px;
+      border: 1px solid #ddd;
+      font-weight: bold;
+      font-size: 0.8em;
+      word-wrap: break-word;
+    }
 
-        th {
-            background-color: #f8f9fa;
-        }
-        
-        /* Input field styling */
-        .value-input {
-            width: 100%;
-            height: 100%;
-            padding: 12px 8px;
-            border: none;
-            background-color: transparent;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1em;
-            box-sizing: border-box;
-            color: #000;
-        }
+    th {
+      background-color: #f8f9fa;
+    }
 
-        /* Remove arrows from number inputs */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-        
-        /* Color Coding Classes */
-        .difficulty-max { background-color: #d9534f; color: white; }
-        .difficulty-heavy-plus { background-color: #e76f51; color: white; }
-        .difficulty-heavy { background-color: #f4a261; color: black; }
-        .difficulty-mod-plus { background-color: #e9c46a; color: black; }
-        .difficulty-mod { background-color: #2a9d8f; color: white; }
-        .difficulty-light-plus { background-color: #8ab17d; color: black; }
-        .difficulty-light { background-color: #4CAF50; color: white; }
-        .difficulty-too-light { background-color: #d3d3d3; color: black; }
+    .value-input {
+      width: 100%;
+      padding: 4px;
+      border: none;
+      background-color: transparent;
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.85em;
+      box-sizing: border-box;
+      color: #000;
+    }
 
-    </style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .difficulty-max { background-color: #d9534f; color: white; }
+    .difficulty-heavy-plus { background-color: #e76f51; color: white; }
+    .difficulty-heavy { background-color: #f4a261; color: black; }
+    .difficulty-mod-plus { background-color: #e9c46a; color: black; }
+    .difficulty-mod { background-color: #2a9d8f; color: white; }
+    .difficulty-light-plus { background-color: #8ab17d; color: black; }
+    .difficulty-light { background-color: #4CAF50; color: white; }
+    .difficulty-too-light { background-color: #d3d3d3; color: black; }
+
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 0.7em;
+        padding: 4px 2px;
+      }
+      .value-input {
+        font-size: 0.75em;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Relative Intensity Calculator</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Difficulty</th>
-                <th>x1</th>
-                <th>x2</th>
-                <th>x3</th>
-                <th>x4</th>
-                <th>x5</th>
-                <th>x6</th>
-                <th>x8</th>
-                <th>x10</th>
-            </tr>
-        </thead>
-        <tbody>
-            </tbody>
-    </table>
+  <h1>Relative Intensity Calculator</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Difficulty</th>
+        <th>x1</th>
+        <th>x2</th>
+        <th>x3</th>
+        <th>x4</th>
+        <th>x5</th>
+        <th>x6</th>
+        <th>x8</th>
+        <th>x10</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 </div>
 
 <script>
-    // Data structure containing all percentages from the table image.
-    // The "recs" property has been removed.
-    const tableData = [
-        { level: "MAX", class: "difficulty-max", percentages: [100.0, 95.0, 92.5, 90.0, 87.5, 85.0, 80.0, 72.5] },
-        { level: "HEAVY +", class: "difficulty-heavy-plus", percentages: [97.5, 92.8, 90.3, 87.8, 85.5, 83.0, 78.0, 70.8] },
-        { level: "", class: "difficulty-heavy-plus", percentages: [95.0, 90.3, 88.0, 85.5, 83.3, 80.8, 76.0, 69.0] },
-        { level: "HEAVY", class: "difficulty-heavy", percentages: [92.5, 88.0, 85.8, 83.3, 81.0, 78.8, 74.0, 67.3] },
-        { level: "", class: "difficulty-heavy", percentages: [90.0, 85.5, 83.3, 81.0, 78.8, 76.5, 72.0, 65.3] },
-        { level: "MOD +", class: "difficulty-mod-plus", percentages: [87.5, 83.3, 81.0, 78.8, 76.8, 74.5, 70.0, 63.5] },
-        { level: "", class: "difficulty-mod-plus", percentages: [85.0, 80.8, 78.8, 76.5, 74.5, 72.3, 68.0, 61.8] },
-        { level: "MOD", class: "difficulty-mod", percentages: [82.5, 78.5, 76.5, 74.3, 72.3, 70.3, 66.0, 60.0] },
-        { level: "", class: "difficulty-mod", percentages: [80.0, 76.0, 74.0, 72.0, 70.0, 68.0, 64.0, 58.0] },
-        { level: "LIGHT +", class: "difficulty-light-plus", percentages: [77.5, 73.8, 71.8, 69.8, 68.0, 66.0, 62.0, 56.3] },
-        { level: "", class: "difficulty-light-plus", percentages: [75.0, 71.3, 69.5, 67.5, 65.8, 63.8, 60.0, 54.5] },
-        { level: "LIGHT", class: "difficulty-light", percentages: [72.5, 69.0, 67.3, 65.3, 63.5, 61.8, 58.0, 52.8] },
-        { level: "", class: "difficulty-light", percentages: [70.0, 66.5, 64.8, 63.0, 61.3, 59.5, 56.0, 50.8] },
-        { level: "TOO LIGHT", class: "difficulty-too-light", percentages: [67.5, 64.3, 62.5, 60.8, 59.3, 57.5, 54.0, 49.0] },
-        { level: "", class: "difficulty-too-light", percentages: [65.0, 61.8, 60.3, 58.5, 57.0, 55.3, 52.0, 47.3] },
-    ];
-    
-    // An array to hold all percentages for easy lookup
-    const percentagesMatrix = tableData.map(row => row.percentages);
+  const tableData = [
+    { level: "MAX", class: "difficulty-max", percentages: [100.0, 95.0, 92.5, 90.0, 87.5, 85.0, 80.0, 72.5] },
+    { level: "HEAVY +", class: "difficulty-heavy-plus", percentages: [97.5, 92.8, 90.3, 87.8, 85.5, 83.0, 78.0, 70.8] },
+    { level: "", class: "difficulty-heavy-plus", percentages: [95.0, 90.3, 88.0, 85.5, 83.3, 80.8, 76.0, 69.0] },
+    { level: "HEAVY", class: "difficulty-heavy", percentages: [92.5, 88.0, 85.8, 83.3, 81.0, 78.8, 74.0, 67.3] },
+    { level: "", class: "difficulty-heavy", percentages: [90.0, 85.5, 83.3, 81.0, 78.8, 76.5, 72.0, 65.3] },
+    { level: "MOD +", class: "difficulty-mod-plus", percentages: [87.5, 83.3, 81.0, 78.8, 76.8, 74.5, 70.0, 63.5] },
+    { level: "", class: "difficulty-mod-plus", percentages: [85.0, 80.8, 78.8, 76.5, 74.5, 72.3, 68.0, 61.8] },
+    { level: "MOD", class: "difficulty-mod", percentages: [82.5, 78.5, 76.5, 74.3, 72.3, 70.3, 66.0, 60.0] },
+    { level: "", class: "difficulty-mod", percentages: [80.0, 76.0, 74.0, 72.0, 70.0, 68.0, 64.0, 58.0] },
+    { level: "LIGHT +", class: "difficulty-light-plus", percentages: [77.5, 73.8, 71.8, 69.8, 68.0, 66.0, 62.0, 56.3] },
+    { level: "", class: "difficulty-light-plus", percentages: [75.0, 71.3, 69.5, 67.5, 65.8, 63.8, 60.0, 54.5] },
+    { level: "LIGHT", class: "difficulty-light", percentages: [72.5, 69.0, 67.3, 65.3, 63.5, 61.8, 58.0, 52.8] },
+    { level: "", class: "difficulty-light", percentages: [70.0, 66.5, 64.8, 63.0, 61.3, 59.5, 56.0, 50.8] },
+    { level: "TOO LIGHT", class: "difficulty-too-light", percentages: [67.5, 64.3, 62.5, 60.8, 59.3, 57.5, 54.0, 49.0] },
+    { level: "", class: "difficulty-too-light", percentages: [65.0, 61.8, 60.3, 58.5, 57.0, 55.3, 52.0, 47.3] },
+  ];
 
-    const tbody = document.querySelector("table tbody");
+  const percentagesMatrix = tableData.map(row => row.percentages);
+  const tbody = document.querySelector("table tbody");
 
-    // Dynamically build the table rows and cells
-    tableData.forEach((rowData, rowIndex) => {
-        const tr = document.createElement("tr");
-        tr.className = rowData.class;
-        
-        // Difficulty Cell
-        const tdDifficulty = document.createElement("td");
-        tdDifficulty.textContent = rowData.level;
-        tr.appendChild(tdDifficulty);
+  tableData.forEach((rowData, rowIndex) => {
+    const tr = document.createElement("tr");
+    tr.className = rowData.class;
 
-        // Value Input Cells
-        rowData.percentages.forEach((percentage, colIndex) => {
-            const td = document.createElement("td");
-            const input = document.createElement("input");
-            input.type = "number";
-            input.className = "value-input";
-            input.setAttribute("data-row", rowIndex);
-            input.setAttribute("data-col", colIndex);
-            input.setAttribute("step", "0.1"); // Allow decimal inputs
-            td.appendChild(input);
-            tr.appendChild(td);
-        });
-        
-        tbody.appendChild(tr);
+    const tdDifficulty = document.createElement("td");
+    tdDifficulty.textContent = rowData.level;
+    tr.appendChild(tdDifficulty);
+
+    rowData.percentages.forEach((_, colIndex) => {
+      const td = document.createElement("td");
+      const input = document.createElement("input");
+      input.type = "number";
+      input.className = "value-input";
+      input.setAttribute("data-row", rowIndex);
+      input.setAttribute("data-col", colIndex);
+      input.setAttribute("step", "0.1");
+      td.appendChild(input);
+      tr.appendChild(td);
     });
 
-    const allInputs = document.querySelectorAll('.value-input');
+    tbody.appendChild(tr);
+  });
 
-    function updateTable(event) {
-        const sourceInput = event.target;
-        const sourceValue = parseFloat(sourceInput.value);
-        
-        // If the input is empty or not a number, clear all fields
-        if (isNaN(sourceValue) || sourceInput.value === "") {
-            allInputs.forEach(input => {
-                input.value = "";
-            });
-            return;
-        }
+  const allInputs = document.querySelectorAll('.value-input');
 
-        const sourceRow = parseInt(sourceInput.dataset.row);
-        const sourceCol = parseInt(sourceInput.dataset.col);
-        
-        const sourcePercentage = percentagesMatrix[sourceRow][sourceCol];
-        
-        // Calculate the theoretical 1 Rep Max (100% value)
-        const oneRepMax = sourceValue / (sourcePercentage / 100);
+  function updateTable(event) {
+    const sourceInput = event.target;
+    const sourceValue = parseFloat(sourceInput.value);
 
-        // Update all other input fields based on the 1RM
-        allInputs.forEach(input => {
-            // Don't update the field the user is currently typing in
-            if (input === sourceInput) {
-                return;
-            }
-            
-            const targetRow = parseInt(input.dataset.row);
-            const targetCol = parseInt(input.dataset.col);
-            const targetPercentage = percentagesMatrix[targetRow][targetCol];
-
-            const calculatedValue = oneRepMax * (targetPercentage / 100);
-
-            // Display with one decimal place for cleanliness
-            input.value = calculatedValue.toFixed(1);
-        });
+    if (isNaN(sourceValue) || sourceInput.value === "") {
+      allInputs.forEach(input => input.value = "");
+      return;
     }
 
-    // Attach the event listener to every input field
-    allInputs.forEach(input => {
-        input.addEventListener('input', updateTable);
-    });
+    const sourceRow = parseInt(sourceInput.dataset.row);
+    const sourceCol = parseInt(sourceInput.dataset.col);
+    const sourcePercentage = percentagesMatrix[sourceRow][sourceCol];
+    const oneRepMax = sourceValue / (sourcePercentage / 100);
 
+    allInputs.forEach(input => {
+      if (input === sourceInput) return;
+      const targetRow = parseInt(input.dataset.row);
+      const targetCol = parseInt(input.dataset.col);
+      const targetPercentage = percentagesMatrix[targetRow][targetCol];
+      input.value = (oneRepMax * (targetPercentage / 100)).toFixed(1);
+    });
+  }
+
+  allInputs.forEach(input => input.addEventListener('input', updateTable));
 </script>
 
 </body>
